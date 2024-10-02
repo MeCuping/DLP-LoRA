@@ -1,6 +1,10 @@
-# DLP-LoRA Introduction
+# DLP-LoRA
 
-We introduce DLP-LoRA, a dynamic and lightweight plugin that employs a mini-MLP module with only 5 million parameters to dynamically fuse multiple LoRAs at the sentence level using top-p sampling strategies. Our comprehensive evaluation across 17 multiple-choice (MCQ) tasks and 9 question-answering (QA) tasks demonstrates that DLP-LoRA not only closely matches the performance of individually fine-tuned single LoRAs but also surpasses them on certain tasks, all while incurring less than twice the inference time. Through detailed discussions and ablation studies, we have shown that DLP-LoRA effectively balances performance and efficiency in multi-task learning, making it a practical solution for dynamic multi-task adaptation in large language models (LLMs).
+<p align="center">
+<img src="DLP-LoRA.png" alt=drawing width="400"/>
+</p>
+
+TL;DR: We introduce DLP-LoRA, a dynamic and lightweight plugin that uses a mini-MLP to efficiently fuse multiple LoRAs at the sentence level in large language models. Evaluated across 26 tasks, DLP-LoRA matches or surpasses single-task LoRA performance while maintaining efficient inference times, effectively balancing performance and efficiency for dynamic multi-task adaptation.
 
 [arXiv:..................](#)
 
