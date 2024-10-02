@@ -1,95 +1,89 @@
-# **DLP-LoRA introduce**
+# DLP-LoRA Introduction
 
-We introduced DLP-LoRA, a dynamic and lightweight plugin that employs a mini-MLP module
-with only 5 million parameters to dynamically fuse multiple LoRAs at the sentence level using
-top-p sampling strategies. Our comprehensive evaluation across 17 MCQ tasks and 9 QA tasks
-demonstrates that DLP-LoRA not only closely matches the performance of individually fine-tuned
-single LoRAs but also surpasses them on certain tasks, all while incurring less than twice the in-
-ference time. Through detailed discussions and ablation studies, we have shown that DLP-LoRA
-effectively balances performance and efficiency in multi-task learning, making it a practical solution
-for dynamic multi-task adaptation in LLMs.
+We introduce DLP-LoRA, a dynamic and lightweight plugin that employs a mini-MLP module with only 5 million parameters to dynamically fuse multiple LoRAs at the sentence level using top-p sampling strategies. Our comprehensive evaluation across 17 multiple-choice (MCQ) tasks and 9 question-answering (QA) tasks demonstrates that DLP-LoRA not only closely matches the performance of individually fine-tuned single LoRAs but also surpasses them on certain tasks, all while incurring less than twice the inference time. Through detailed discussions and ablation studies, we have shown that DLP-LoRA effectively balances performance and efficiency in multi-task learning, making it a practical solution for dynamic multi-task adaptation in large language models (LLMs).
 
-arXiv:..................
+[arXiv:..................](#)
 
-## **DLP-LoRA quick start**
+## DLP-LoRA Quick Start
 
-### 1. LLMs&Classifier Model prepare:
+### 1. Prepare LLMs & Classifier Model
 
-- First you may need to choose the LLM you would like to use, and put them in ./BasicModel/LLMs, and get albert and robert-distil though huggingface.
+- First, choose the LLM you would like to use and place it in `./BasicModel/LLMs`. You can obtain `albert` and `roberta-distil` through Hugging Face.
 
-### 2. DataSets prepare:
+### 2. Prepare Datasets
 
-- To train your own LoRA or test your DLP-LoRA, you need preprocess your datasets to json which formed by DictList, where each dictionary contains keys "Q" and "A". Then inject them into DataSets.
+- To train your own LoRA or test your DLP-LoRA, you need to preprocess your datasets into JSON format, structured as a DictList, where each dictionary contains keys "Q" and "A". Then inject them into the Datasets.
 
-# DLP-LoRA Gradio Usage
+## DLP-LoRA Gradio Usage
 
-## Basic Page
+### Basic Page
 
-### 1. Basic LoRA Training
+#### 1. Basic LoRA Training
 
 On this page, you can test basic models and train LoRA by filling in the required fields.
 
 **Important Notes**:
 - Regardless of the mode you're using, make sure to change the `src.Process.to_one_hot`'s `vocab_size` to match the vocab size of your LLM.
-- Since different LLMs have varying end tokens, you also need to update `src.Process.generate_text` with the correct token id for your model’s end token (this part may require editing as it’s not the latest version developed).
+- Since different LLMs have varying end tokens, you also need to update `src.Process.generate_text` with the correct token ID for your model’s end token (this part may require editing as it’s not the latest version developed).
 
 **JSON Format**:  
 - The format is `DictList`, where each dictionary contains keys "Q" and "A".
 
-**While Training or Testing**: 
-- You may need fill the Datasets Path with the write json, and if you are using testing mode of Basic model then LoRA path you can fill anything you like.
+**While Training or Testing**:
+- You may need to fill the Datasets Path with the correct JSON file, and if you are using the testing mode of the Basic model, then you can fill the LoRA path with anything you like.
 
-**Outputs**
-1. ModelOutput
-- The model will output to ./finish/lora, where you can find your LoRA model.
+**Outputs**:
+1. **ModelOutput**:
+   - The model will output to `./finish/lora`, where you can find your LoRA model.
 
-2. TestDataOutput:
-- The TestData will output to ./TestOutputs, where you can find your test feedback.
+2. **TestDataOutput**:
+   - The test data will output to `./TestOutputs`, where you can find your test feedback.
 
-### 2. ClassifierTraining
+#### 2. Classifier Training
 
-On this page, you can Traing your own Classifier by choose different model of `albert` and `Roberta-base-distil` or `MLP`(MLP config based on the albert so while using MLP choose albert is OK)
+On this page, you can train your own Classifier by choosing different models (`albert`, `roberta-base-distil`, or `MLP`).
 
 **Important Notes**:
-- The datasets which training for LoRA can be fully used by Classifier, you can use Page 3`Classifier datasets maker Fusion` to invert your LoRA datasets to Classifier datasets.
+- The datasets used for training LoRA can be fully utilized by the Classifier. You can use Page 3, `Classifier datasets maker Fusion`, to convert your LoRA datasets into Classifier datasets.
 
-- Notice only the right format formed by Page 3 could be used to train the classifier, more details under the code
+- Only datasets formed in the correct format from Page 3 can be used to train the classifier; more details are provided in the code.
 
-**While Training or Testing**: 
-- You may need fill the Datasets Path with the write json, and if you are using testing mode of Basic model then LoRA path you can fill anything you like.
+**While Training or Testing**:
+- You may need to fill the Datasets Path with the correct JSON file, and if you are using the testing mode of the Basic model, then you can fill the LoRA path with anything you like.
 
-**Outputs**
-1. ModelOutput
-- The model will output to ./finish/Classifier, where you can find your Classifier model
+**Outputs**:
+1. **ModelOutput**:
+   - The model will output to `./finish/Classifier`, where you can find your Classifier model.
 
-### 3. Classifier datasets maker Fusion
+#### 3. Classifier Datasets Maker Fusion
 
-On this page, you can invert your LoRA datasets to Classifier datasets.
+On this page, you can convert your LoRA datasets into Classifier datasets.
 
-**How to use**:
-1. The datasets which training for LoRA can be fully used by Classifier, you can just put your LoRA datasets which keep same format of page 1 then push the start it will out put to your folder.
+**How to Use**:
+1. The datasets used for training LoRA can be fully utilized by the Classifier. You just need to place your LoRA datasets, keeping the same format as Page 1, and click start to output them to your folder.
 
-2. Cause you are training the classifier so we designed the fusion function to help you fusion your different datasets
+2. Since you are training the classifier, we designed the fusion function to help you combine different datasets.
 
-- Notice is better to sample same number of the datasets, then may give a better feed back.
+- Note: It is better to sample the same number of datasets for better feedback.
 
-### 4. DLP-LoRA Test
+#### 4. DLP-LoRA Test
 
-While you got the LoRA and Classifier, is time to start DLP-LoRA
+Once you have your LoRA and Classifier, it’s time to start DLP-LoRA.
 
-**How to use**:
-1. Firstly, you need form a `LoRA pathList`.txt and push it into the blank for our model to find your LoRAs.
+**How to Use**:
+1. First, create a `LoRA pathList.txt` and input it into the provided space for our model to find your LoRAs.
 
-2. Then you need choose the type of your classifier and filling other path follow the page's order.
+2. Then, choose the type of your classifier and fill in the other paths following the page’s order.
 
-3. While you filling all blank, choose start then it will start testing your DLP-LoRA
+3. After filling in all the fields, click start to begin testing your DLP-LoRA.
 
 **JSON Format**:  
 - The format is `DictList`, where each dictionary contains keys "Q" and "A".
 
-**Outputs**
-2. TestDataOutput:
-- The TestData will output to ./TestOutputs, where you can find your DLP-LoRA test feed back.
+**Outputs**:
+1. **TestDataOutput**:
+   - The test data will output to `./TestOutputs`, where you can find your DLP-LoRA test feedback.
+
 
 **Notice the empty folder will not show in Github**
 ```
