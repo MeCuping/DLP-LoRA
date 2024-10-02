@@ -1,7 +1,7 @@
 # DLP-LoRA
 
 <p align="center">
-<img src="DLP-LoRA.png" alt=drawing width="400"/>
+<img src="DLP-LoRA.png" alt=drawing width="600"/>
 </p>
 
 TL;DR: We introduce DLP-LoRA, a dynamic and lightweight plugin that uses a mini-MLP to efficiently fuse multiple LoRAs at the sentence level in large language models. Evaluated across 26 tasks, DLP-LoRA matches or surpasses single-task LoRA performance while maintaining efficient inference times, effectively balancing performance and efficiency for dynamic multi-task adaptation.
