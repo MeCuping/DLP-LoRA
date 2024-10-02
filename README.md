@@ -1,4 +1,4 @@
-**DLP-LoRA introduce**
+# **DLP-LoRA introduce**
 
 We introduced DLP-LoRA, a dynamic and lightweight plugin that employs a mini-MLP module
 with only 5 million parameters to dynamically fuse multiple LoRAs at the sentence level using
@@ -11,13 +11,13 @@ for dynamic multi-task adaptation in LLMs.
 
 arXiv:..................
 
-**DLP-LoRA quick start**
+## **DLP-LoRA quick start**
 
-## 1. LLMs&Classifier Model prepare:
+### 1. LLMs&Classifier Model prepare:
 
 - First you may need to choose the LLM you would like to use, and put them in ./BasicModel/LLMs, and get albert and robert-distil though huggingface.
 
-## 2. DataSets prepare:
+### 2. DataSets prepare:
 
 - To train your own LoRA or test your DLP-LoRA, you need preprocess your datasets to json which formed by DictList, where each dictionary contains keys "Q" and "A". Then inject them into DataSets.
 
