@@ -12,7 +12,7 @@ TL;DR: We introduce DLP-LoRA, a dynamic and lightweight plugin that uses a mini-
 
 ### 1. Prepare LLMs & Classifier Model
 
-- First, choose the LLM you would like to use and place it in `./BasicModel/LLMs`. You can obtain `albert` and `roberta-distil` through Hugging Face.
+- First, choose the LLM you would like to use and place it in `./BasicModel/LLMs`. You can use `albert` and `roberta-distil` as the classifier plugin through Hugging Face.
 
 ### 2. Prepare Datasets
 
